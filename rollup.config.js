@@ -29,7 +29,7 @@ export default [
       resolve({ browser: true }), // so Rollup can find `ms`
       commonjs(), // so Rollup can convert `ms` to an ES module
       ts({ typescript }),
-      terser(),
+      // terser(),
     ],
   },
 
@@ -43,7 +43,7 @@ export default [
     external: [...Object.keys(pkg.dependencies)],
     plugins: [
       ts({ typescript }),
-      terser(),
+      // terser(),
     ],
   },
 
@@ -57,7 +57,7 @@ export default [
     external: [...Object.keys(pkg.dependencies)],
     plugins: [
       ts({ typescript }),
-      terser(),
+      // terser(),
     ],
   },
 ];
