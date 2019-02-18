@@ -150,12 +150,12 @@ function defaultRequest(service, endpoint, _a) {
 }
 function handleResponse(response) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, headers, status, statusText, rawBody, body;
+        var _a, rawHeaders, status, statusText, rawBody, body, headers;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0: return [4 /*yield*/, response];
                 case 1:
-                    _a = _b.sent(), headers = _a.headers, status = _a.status, statusText = _a.statusText;
+                    _a = _b.sent(), rawHeaders = _a.headers, status = _a.status, statusText = _a.statusText;
                     return [4 /*yield*/, response.json()];
                 case 2:
                     rawBody = _b.sent();
@@ -168,6 +168,10 @@ function handleResponse(response) {
                     else {
                         body = {};
                     }
+                    headers = {};
+                    rawHeaders.forEach(function (value, key) {
+                        headers[key] = value;
+                    });
                     return [2 /*return*/, {
                             body: body,
                             headers: headers,
@@ -195,8 +199,8 @@ function get(service, endpoint, options) {
                     _b = _c.sent(), headers = _b.headers, body = _b.body;
                     pagination = {
                         total: headers['x-total'],
-                        next: headers['x-next-page'] || null,
-                        current: headers['x-page'] || null,
+                        next: parseInt(headers['x-next-page'], 10) || null,
+                        current: parseInt(headers['x-page'], 10) || 1,
                         previous: headers['x-prev-page'] || null,
                         perPage: headers['x-per-page'],
                         totalPages: headers['x-total-pages'],
